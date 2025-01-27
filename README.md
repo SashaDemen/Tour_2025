@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![](../../../PROFES~1/AppData/Local/Temp/travel-022.jpg)
 
 
@@ -23,3 +24,6 @@
 Користування проектом:
 
 1. Запускати командою : uvicorn main:app --reload
+=======
+# Tour_2025
+>>>>>>> c0ac911381463c5daab284d032aa71fc07ca8944
