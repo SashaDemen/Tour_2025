@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<nav class="navbar navbar-expand-lg" >
+  <a class="navbar-brand" href="#"><button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#tourModal">Add Tour</button></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('register') }}"><button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#regModal">Registration</button></a>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}"><button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#regModal">Login</button></a>
+      </li>
+    </ul>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+      <button id="idSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </div>
+</nav>
+
+
+
+<div class="row row-cols-3" id="tours" style="background-color: lightblue;">
+    {% for t in tours %}
+<div class="col">
+<div class="card mx-3 mt-3">
+    <img src="{{ t.images }}" alt="Card image cap" class="card-img-top" style="width:430px;height:250px;">
+  <div class="card-body">
+    <div class="card-title">
+    </div>
+    <div class="card-text" id="tourCard{{ t.id }}">
+                <ul id="tour{{ t.id }}">
+                            <h5>{{ t.name }}</h5>
+                            <li>{{ t.city }}</li>
+                            <li>{{ t.days }}</li>
+                            <li>{{ t.price }}$</li>
+                            <li>{{ t.date }}</li>
+                </ul>
+        <button type="button" class="btn btn-outline-success" data-bs-target="#buyModal" data-bs-toggle="modal">Buy Tour</button>
+    </div>
+  </div>
+</div>
+    </div>
+      {% endfor %}
+</div>
+
+{% endblock %}
+
+
+{% block modals %}
+<div class="modal fade" id="tourModal" tabindex="-1" aria-labelledby="tourModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="tourModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="text" id="tourName" placeholder="name">
+            <input type="text" id="tourCity" placeholder="city">
+            <input type="number" id="tourDays" placeholder="days">
+            <input type="number" id="tourPrice" placeholder="price">
+            <input type="date" id="tourDate" placeholder="date">
+            <input type="file" id="images">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+          <button type="button" class="btn btn-primary" id="saveTour">Save changes</button>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="buyModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="text" id="user_id" placeholder="name">
+            <input type="text" id="tour_id" placeholder="city">
+            <input type="date" id="start_at" placeholder="start_at">
+            <input type="date" id="end_at" placeholder="end_at">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
+          <button type="button" class="btn btn-primary" id="saveBuy">Save changes</button>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script src="/static/js/create-tour.js"></script>
+  <script src="/static/js/tour-buy.js"></script>
+  <script src="/static/js/search.js"></script>
+  <script src="/static/js/receipt.js"></script>
+{% endblock %}
